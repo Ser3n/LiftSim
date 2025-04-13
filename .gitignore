@@ -1,0 +1,28 @@
+# Executable
+Ass2.exe
+*.exe
+*.out
+
+# Build directories
+build/
+bin/
+obj/
+
+# macOS system files
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Project specific
+commands.txt

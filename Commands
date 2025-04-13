@@ -1,0 +1,22 @@
+#Git Setup (In order)
+git init
+git branch -M main          # Create main branch
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/Ser3n/BookingSystem
+git push -u origin main
+
+#Common Git Commands
+git status                    # Check status of changes
+git add <file>               # Stage specific file
+git commit -m "message"      # Commit with message
+git push                     # Push to remote
+git pull                     # Pull from remote
+git branch                   # List branches
+git checkout -b <branch>     # Create and switch to new branch
+
+#Safe Pull Commands
+git fetch origin main       # Check remote changes without applying
+git status                  # See what would change
+git stash                   # Backup local changes if needed
+git pull                    # Pull remote changes
