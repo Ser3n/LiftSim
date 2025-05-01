@@ -123,19 +123,19 @@ int count_Semphores = 0; // Count the number of semaphores created
 void print_at_xy(int x, int y, const char *s)
 {
 
-	// Lets first check if the Cords are within bounds this will prefent error in terminal, print to console if out of bounds
+	//check if the cords are valid
 	if (x < 0 || y < 0)
 	{
-		printf("ERROR: Invalid print coordinates (%d,%d)\n", x, y);
+		// printf("ERROR: Invalid print coordinates (%d,%d)\n", x, y);
 		return;
 	}
 
 	// Wait for the print lock and implementing mutual exclusion
 	semaphore_wait(&print_lock); // Wait for the lock to be free
 
-	// DEBUG : Count the number of semaphore operations
+	// DEBUG : Count the number of semaphore operations because there are so many and to not bog up the console print every 100
 	count_Semphores++;
-	// if (count_Semphores % 100 == 0)
+	// if (count_Semphores % 100 == 0)//Print every 100 operations
 	// {
 	// 	printf("DEBUG: Semaphore operations: %d\n", count_Semphores);
 	// }
@@ -233,7 +233,7 @@ void get_into_lift(lift_info *lift, int direction)
 			//  lift->no, lift->position, lift->peopleinlift);
 
 			// Release floor mutex before Sleep()
-			semaphore_signal(&floor_lock);
+			//semaphore_signal(&floor_lock);
 
 			// Wait for person to get into lift
 			Sleep(GETINSPEED);
@@ -330,18 +330,20 @@ void *lift_thread(void *p)
 		if (lift.direction == UP || !lift.peopleinlift)
 		{
 			// add locks and releases TODO?
-			// semephore_signal(&lift_lock); // Release lift lock
+			//semaphore_signal(&lift_lock); // Release lift lock
 			//  Pick up passengers waiting to go up
 			get_into_lift(&lift, UP);
 
-			// semephore_wait(&lift_lock); // Re-acquire lift lock
+			 //semaphore_wait(&lift_lock); // Re-acquire lift lock
 		}
 		// Check if lift is going down or is empty
 		if (lift.direction == DOWN || !lift.peopleinlift)
 		{
 			// SIGNAL and WAIT before getting into lift??
+			//semaphore_signal(&lift_lock);
 			//  Pick up passengers waiting to go down
 			get_into_lift(&lift, DOWN);
+			//semaphore_wait(&lift_lock);
 		}
 
 		// Erase lift from screen
@@ -374,7 +376,7 @@ void *person_thread(void *p)
 	unsigned long long int pid = (unsigned long long int)p;
 
 	// Randomise
-	randomise();
+	//randomise();
 
 	// printf("DEBUG: Person %llu initialized on ground floor\n", pid);
 
